@@ -1,18 +1,23 @@
-cmake_minimum_required(VERSION 3.8)
-
-project(Triangle CXX)
+project (Triangle CXX)
 
 set(SOURCES main.cpp
     $<TARGET_OBJECTS:TutorialTools>)
     
-find_package(GLUT REQUIRED)
+message($<TARGET_OBJECTS:TutorialTools>)
+
 find_package(OpenGL REQUIRED)
-include_directories( ${OPENGL_INCLUDE_DIR}  ${GLUT_INCLUDE_DIR} )
-MESSAGE("${OPENGL_INCLUDE_DIR}")
-MESSAGE("${GLUT_INCLUDE_DIR}")
+find_package(GLUT REQUIRED)
+find_package(GLEW REQUIRED)
 
 add_executable(Triangle ${SOURCES})
-target_link_libraries(Triangle PRIVATE GTest RadeonRays Calc ${OPENGL_LIBRARY} ${GLUT_LIBRARY})
 target_compile_features(Triangle PRIVATE cxx_std_11)
-target_compile_definitions(Triangle PRIVATE USE_OPENCL=1)
-target_include_directories(Triangle PRIVATE "${RadeonRaysSDK_SOURCE_DIR}")
+target_link_libraries(Triangle PRIVATE RadeonRays)
+if (APPLE OR UNIX)
+    target_link_libraries(Triangle PRIVATE OpenGL::GL GLUT::GLUT GLEW::GLEW)
+elseif (WIN32)
+    target_include_directories(Triangle 
+        PRIVATE ${GLUT_INCLUDES} 
+        PRIVATE ${GLEW_INCLUDES} 
+        )
+    target_link_libraries(Triangle PRIVATE OpenGL::GL ${GLUT_LIBS} ${GLEW_LIBS})
+endif (APPLE OR UNIX)
