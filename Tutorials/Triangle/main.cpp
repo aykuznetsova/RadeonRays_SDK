@@ -21,7 +21,7 @@ THE SOFTWARE.
 ********************************************************************/
 #include "radeon_rays.h"
 #include <GL/glew.h>
-#include <GLUT/GLUT.h>
+#include <GL/glut.h>
 #include <cassert>
 #include <iostream>
 #include <memory>
@@ -37,7 +37,7 @@ namespace {
     };
     int const g_indices[] = { 0, 1, 2 };
     const int g_numfaceverts[] = { 3 };
-    
+
     GLuint g_vertex_buffer, g_index_buffer;
     GLuint g_texture;
     int g_window_width = 640;
@@ -162,10 +162,10 @@ int main(int argc, char* argv[])
     // prepare intersection data
     Intersection isect[3];
     auto isect_buffer = api->CreateBuffer(3 * sizeof(Intersection), nullptr);
-    
+
     //intersection
     api->QueryIntersection(ray_buffer, 3, isect_buffer, nullptr, nullptr);
-    
+
     //get results
     Event* e = nullptr;
     Intersection* tmp = nullptr;
@@ -174,7 +174,7 @@ int main(int argc, char* argv[])
     e->Wait();
     api->DeleteEvent(e);
     e = nullptr;
-    
+
     isect[0] = tmp[0];
     isect[1] = tmp[1];
     isect[2] = tmp[2];

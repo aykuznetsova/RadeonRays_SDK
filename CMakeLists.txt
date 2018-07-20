@@ -47,24 +47,22 @@ endif (WIN32)
 if (RR_USE_OPENCL)
     find_package(OpenCL REQUIRED)
     add_definitions(-DUSE_OPENCL=1)
-    
+
     add_subdirectory(CLW)
 endif (RR_USE_OPENCL)
 
 if (RR_USE_VULKAN)
     find_package(Vulkan REQUIRED)
     add_definitions(-DUSE_VULKAN=1)
-    
+
     add_subdirectory(Anvil)
 endif (RR_USE_VULKAN)
 
 add_subdirectory(Calc)
 add_subdirectory(RadeonRays)
-
+add_subdirectory(Tutorials)
 
 if (NOT RR_NO_TESTS)
     add_subdirectory(Gtest)
     add_subdirectory(UnitTest)
 endif (NOT RR_NO_TESTS)
-
-
