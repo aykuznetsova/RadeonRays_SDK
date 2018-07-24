@@ -1,6 +1,7 @@
 project (Triangle CXX)
 
 set(SOURCES main.cpp
+	    hello.cpp
     $<TARGET_OBJECTS:TutorialTools>)
     
 message($<TARGET_OBJECTS:TutorialTools>)

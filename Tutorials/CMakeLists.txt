@@ -1,5 +1,6 @@
 add_subdirectory(Tools)
-#xadd_subdirectory(CornellBox)
+add_subdirectory(First)
+#add_subdirectory(CornellBox)
 #add_subdirectory(CornellBoxShadow)
 add_subdirectory(Triangle)
 #add_subdirectory(TriangleLight)
